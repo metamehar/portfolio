@@ -1,0 +1,495 @@
+/* ==========================================================================
+   FAISAL — Live Project Cost Calculator
+   A premium modal that uses the LLM (via /api/estimate-cost) to generate
+   a market-aware project cost estimate with live 2026 trend insights.
+   ========================================================================== */
+
+/* ---------- Trigger button (used inline on the homepage) ---------- */
+.fa-calc-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #f85d80 0%, #b06ab3 50%, #4568dc 100%);
+  color: #fff;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease;
+  box-shadow: 0 8px 24px rgba(248, 93, 128, 0.35);
+  letter-spacing: 0.3px;
+}
+
+.fa-calc-trigger:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 36px rgba(248, 93, 128, 0.5);
+}
+
+.fa-calc-trigger:active { transform: scale(0.98); }
+
+.fa-calc-trigger svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* ---------- Modal overlay ---------- */
+.fa-calc-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 6, 12, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 10002;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.fa-calc-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---------- Modal card ---------- */
+.fa-calc-modal {
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: linear-gradient(180deg, rgba(28, 22, 36, 0.98) 0%, rgba(18, 14, 24, 0.98) 100%);
+  border: 1px solid rgba(248, 93, 128, 0.18);
+  border-radius: 24px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.6),
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  color: #fff;
+}
+
+.fa-calc-overlay.is-open .fa-calc-modal {
+  transform: translateY(0) scale(1);
+}
+
+.fa-calc-modal::-webkit-scrollbar { width: 6px; }
+.fa-calc-modal::-webkit-scrollbar-track { background: transparent; }
+.fa-calc-modal::-webkit-scrollbar-thumb {
+  background: rgba(248, 93, 128, 0.3);
+  border-radius: 3px;
+}
+
+/* ---------- Modal header ---------- */
+.fa-calc-header {
+  padding: 22px 26px 18px;
+  background: linear-gradient(135deg, rgba(248, 93, 128, 0.14), rgba(69, 104, 220, 0.10));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px 24px 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.fa-calc-title-block h3 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fa-calc-title-block h3::before {
+  content: '✦';
+  background: linear-gradient(135deg, #f85d80, #b06ab3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 14px;
+}
+
+.fa-calc-title-block p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+}
+
+.fa-calc-close {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.fa-calc-close:hover {
+  background: rgba(248, 93, 128, 0.2);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.fa-calc-close svg { width: 14px; height: 14px; fill: currentColor; }
+
+/* ---------- Form body ---------- */
+.fa-calc-body { padding: 24px 26px; }
+
+.fa-calc-field {
+  margin-bottom: 18px;
+}
+
+.fa-calc-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.fa-calc-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fa-calc-chip {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 9px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.fa-calc-chip:hover {
+  border-color: rgba(248, 93, 128, 0.4);
+  color: #fff;
+  background: rgba(248, 93, 128, 0.08);
+}
+
+.fa-calc-chip.is-active {
+  background: linear-gradient(135deg, #f85d80 0%, #b06ab3 100%);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(248, 93, 128, 0.35);
+}
+
+.fa-calc-input,
+.fa-calc-textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 11px 15px;
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fa-calc-textarea {
+  resize: vertical;
+  min-height: 70px;
+  line-height: 1.5;
+}
+
+.fa-calc-input:focus,
+.fa-calc-textarea:focus {
+  border-color: rgba(248, 93, 128, 0.5);
+  box-shadow: 0 0 0 3px rgba(248, 93, 128, 0.12);
+}
+
+.fa-calc-input::placeholder,
+.fa-calc-textarea::placeholder { color: rgba(255, 255, 255, 0.35); }
+
+.fa-calc-submit {
+  width: 100%;
+  background: linear-gradient(135deg, #f85d80 0%, #b06ab3 100%);
+  border: none;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-family: inherit;
+  margin-top: 6px;
+  box-shadow: 0 6px 18px rgba(248, 93, 128, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.fa-calc-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(248, 93, 128, 0.45);
+}
+
+.fa-calc-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fa-calc-submit svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* ---------- Loading spinner ---------- */
+.fa-calc-loading {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 24px;
+  text-align: center;
+}
+
+.fa-calc-loading.is-visible { display: flex; }
+
+.fa-calc-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(248, 93, 128, 0.2);
+  border-top-color: #f85d80;
+  border-radius: 50%;
+  animation: fa-calc-spin 0.9s linear infinite;
+  margin-bottom: 18px;
+}
+
+@keyframes fa-calc-spin {
+  to { transform: rotate(360deg); }
+}
+
+.fa-calc-loading p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.fa-calc-loading p + p {
+  margin-top: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* ---------- Result card ---------- */
+.fa-calc-result {
+  display: none;
+  padding: 24px 26px;
+}
+
+.fa-calc-result.is-visible { display: block; animation: fa-result-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+@keyframes fa-result-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fa-calc-price-hero {
+  text-align: center;
+  padding: 18px 0 22px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  margin-bottom: 22px;
+}
+
+.fa-calc-price-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.fa-calc-price-range {
+  font-size: 38px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #f85d80 50%, #b06ab3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.fa-calc-price-meta {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.fa-calc-price-meta strong { color: #2ecc71; font-weight: 600; }
+
+.fa-calc-section { margin-bottom: 20px; }
+
+.fa-calc-section h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: rgba(248, 93, 128, 0.85);
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.fa-calc-breakdown {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fa-calc-breakdown li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.82);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.fa-calc-breakdown li:last-child { border-bottom: none; }
+
+.fa-calc-breakdown .item-name { flex: 1; }
+
+.fa-calc-breakdown .item-price {
+  font-weight: 600;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.fa-calc-trends {
+  background: rgba(248, 93, 128, 0.06);
+  border: 1px solid rgba(248, 93, 128, 0.15);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.fa-calc-trends ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fa-calc-trends li {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.5;
+  padding-left: 22px;
+  position: relative;
+}
+
+.fa-calc-trends li::before {
+  content: '↗';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #2ecc71;
+  font-weight: 700;
+}
+
+.fa-calc-protip {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, rgba(248, 93, 128, 0.12), rgba(176, 106, 179, 0.08));
+  border-left: 3px solid #f85d80;
+  border-radius: 8px;
+  font-size: 13px;
+  color: rgba(255, 220, 230, 0.95);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.fa-calc-disclaimer {
+  margin-top: 14px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.fa-calc-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.fa-calc-actions button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 1px solid transparent;
+}
+
+.fa-calc-btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.fa-calc-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.fa-calc-btn-primary {
+  background: linear-gradient(135deg, #f85d80 0%, #b06ab3 100%);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(248, 93, 128, 0.3);
+}
+
+.fa-calc-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(248, 93, 128, 0.45);
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 480px) {
+  .fa-calc-overlay { padding: 0; }
+
+  .fa-calc-modal {
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .fa-calc-header { border-radius: 0; padding: 18px 20px 14px; }
+  .fa-calc-body, .fa-calc-result { padding: 20px; }
+  .fa-calc-price-range { font-size: 32px; }
+}

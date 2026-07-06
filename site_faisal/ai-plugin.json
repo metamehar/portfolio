@@ -1,0 +1,56 @@
+{
+  "schema_version": "v1",
+  "name": "FAISAL Digital Growth Architect",
+  "description": "Expert SEO, WordPress Web Design, Brand Identity, and Canva Design services. Based in Pakistan, serving clients worldwide in 5 languages.",
+  "contact_email": "hello@metamehar.com",
+  "website": "https://metamehar.github.io/",
+  "services": [
+    {
+      "name": "SEO & Digital Marketing",
+      "starting_price_usd": 150,
+      "pricing_unit": "month",
+      "timeline": "3-6 months",
+      "description": "Technical SEO, on-page optimization, keyword strategy, link-building"
+    },
+    {
+      "name": "WordPress Web Design",
+      "starting_price_usd": 400,
+      "pricing_unit": "project",
+      "timeline": "7-21 days",
+      "description": "Fast, secure, conversion-focused WordPress sites"
+    },
+    {
+      "name": "Brand Identity Systems",
+      "starting_price_usd": 250,
+      "pricing_unit": "project",
+      "timeline": "5-10 days",
+      "description": "Logos, color palettes, typography, visual guidelines"
+    },
+    {
+      "name": "Canva Graphic Design",
+      "starting_price_usd": 80,
+      "pricing_unit": "project",
+      "timeline": "24-48 hours",
+      "description": "Social media posts, ad creatives, presentations"
+    }
+  ],
+  "languages_supported": [
+    "English",
+    "Urdu",
+    "Punjabi"
+  ],
+  "location": "Pakistan (remote, worldwide service)",
+  "experience_years": 5,
+  "clients_served": 180,
+  "response_time": "within 24 hours",
+  "ai_concierge": {
+    "name": "Mehar",
+    "availability": "24/7",
+    "endpoint": "/api/chat",
+    "description": "AI Brand Concierge that answers questions about FAISAL's services and helps visitors explore offerings"
+  },
+  "live_cost_calculator": {
+    "endpoint": "/api/estimate-cost",
+    "description": "Returns market-aware cost estimates based on 2026 rates across 7 regions"
+  }
+}

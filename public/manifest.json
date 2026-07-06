@@ -1,0 +1,48 @@
+{
+  "name": "FAISAL — Digital Growth Architect",
+  "short_name": "FAISAL",
+  "description": "Expert SEO, WordPress Web Design, Brand Identity, and Canva Design services from Pakistan. Serving clients worldwide in 5 languages.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0c10",
+  "theme_color": "#0b0c10",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/images/faisal-ai-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/faisal-ai-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Get a Cost Estimate",
+      "short_name": "Estimate",
+      "description": "Get an instant project cost estimate",
+      "url": "/?action=calculator"
+    },
+    {
+      "name": "Contact FAISAL",
+      "short_name": "Contact",
+      "description": "Send a message to FAISAL",
+      "url": "/contact.html"
+    },
+    {
+      "name": "View Portfolio",
+      "short_name": "Portfolio",
+      "description": "See FAISAL's 30-day project showcase",
+      "url": "/portfolio.html"
+    }
+  ]
+}

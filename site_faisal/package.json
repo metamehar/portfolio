@@ -1,0 +1,23 @@
+{
+  "name": "digital-agency-dark-portfolio",
+  "version": "1.0.0",
+  "description": "Premium multi-page dark-themed digital agency portfolio website clone.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server ./ -p 3000 -o"
+  },
+  "keywords": [
+    "portfolio",
+    "agency",
+    "dark-mode",
+    "clone",
+    "html",
+    "css",
+    "js"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

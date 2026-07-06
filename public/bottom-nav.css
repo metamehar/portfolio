@@ -1,0 +1,158 @@
+/* ==========================================================================
+   FAISAL — Premium Mobile Bottom Navigation (v3)
+   - 5 distinct pages: Home, Work, About, Blog, Talk
+   - Premium 3D-style gradient icons with glow
+   - Transparent glassmorphic floating bar
+   - NO overlap with the AI launcher (launcher sits above the nav)
+   ========================================================================== */
+
+.fa-bottom-nav {
+  display: none; /* hidden on desktop */
+}
+
+@media (max-width: 768px) {
+  /* Hide the hamburger menu */
+  .burger-menu {
+    display: none !important;
+  }
+
+  /* Show the bottom nav */
+  .fa-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - 20px);
+    max-width: 420px;
+    height: 68px;
+    background: rgba(20, 16, 26, 0.78);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 22px;
+    box-shadow:
+      0 16px 40px rgba(0, 0, 0, 0.55),
+      0 4px 12px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    z-index: 9998;
+    overflow: visible;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    align-items: stretch;
+    justify-content: space-around;
+    animation: fa-bottom-nav-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+  }
+
+  @keyframes fa-bottom-nav-in {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(80px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  .fa-bottom-nav-item {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 10px 4px;
+    transition: color 0.25s ease;
+    position: relative;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    -webkit-tap-highlight-color: transparent;
+    /* Ensure links are always clickable */
+    pointer-events: auto;
+    z-index: 1;
+  }
+
+  .fa-bottom-nav-item svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                filter 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .fa-bottom-nav-item:hover {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .fa-bottom-nav-item:hover svg {
+    transform: translateY(-2px) scale(1.08);
+  }
+
+  /* Active state — gradient glow pill behind the icon */
+  .fa-bottom-nav-item.is-active {
+    color: #fff;
+  }
+
+  .fa-bottom-nav-item.is-active::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 36px;
+    background: linear-gradient(135deg, rgba(248, 93, 128, 0.3), rgba(176, 106, 179, 0.22));
+    border: 1px solid rgba(248, 93, 128, 0.38);
+    border-radius: 13px;
+    z-index: 0;
+    pointer-events: none;
+    box-shadow: 0 0 18px rgba(248, 93, 128, 0.3);
+  }
+
+  .fa-bottom-nav-item.is-active svg {
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 8px rgba(248, 93, 128, 0.7));
+  }
+
+  .fa-bottom-nav-item.is-active span {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Small gradient dot above the active item */
+  .fa-bottom-nav-item.is-active::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #f85d80;
+    box-shadow: 0 0 8px rgba(248, 93, 128, 0.9);
+  }
+
+  /* Add bottom padding to body so nav never covers content.
+     IMPORTANT: keep this matched to the nav height + bottom offset. */
+  body {
+    padding-bottom: 96px;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .fa-bottom-nav,
+  .fa-bottom-nav-item svg {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}

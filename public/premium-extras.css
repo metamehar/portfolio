@@ -1,0 +1,120 @@
+/* ==========================================================================
+   FAISAL — Bonus Premium Enhancements
+   - Reading progress bar (top of viewport)
+   - Live visitor social-proof badge (bottom-left, dismissible)
+   - Premium hover micro-interactions for nav links (desktop)
+   ========================================================================== */
+
+/* ---------- Reading progress bar ---------- */
+.fa-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #f85d80 0%, #b06ab3 50%, #4568dc 100%);
+  z-index: 10003;
+  pointer-events: none;
+  transition: width 0.05s linear;
+  box-shadow: 0 0 10px rgba(248, 93, 128, 0.5);
+}
+
+/* ---------- Social proof badge (bottom-left, dismissible) ---------- */
+.fa-social-proof {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  background: rgba(22, 18, 28, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  z-index: 9997;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-width: 280px;
+  cursor: pointer;
+}
+
+.fa-social-proof.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fa-social-proof.is-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+.fa-social-proof-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2ecc71;
+  box-shadow: 0 0 8px rgba(46, 204, 113, 0.8);
+  animation: fa-proof-pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes fa-proof-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+.fa-social-proof-text {
+  line-height: 1.4;
+}
+
+.fa-social-proof-text strong {
+  color: #f85d80;
+  font-weight: 700;
+}
+
+.fa-social-proof-close {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.fa-social-proof-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* Mobile: hide social proof (would clash with bottom nav + assistant launcher) */
+@media (max-width: 768px) {
+  .fa-social-proof { display: none !important; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .fa-progress-bar,
+  .fa-social-proof,
+  .fa-social-proof-dot {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}

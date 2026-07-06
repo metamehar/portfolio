@@ -1,0 +1,648 @@
+/* ==========================================================================
+   FAISAL — AI Brand Concierge Widget (v4 — Gemini-style launcher)
+   - Launcher: animated gradient spark (Gemini-inspired) that morphs into an X
+   - Panel: glassmorphic, premium, with controls bar (New Pro Tip, Clear, Close)
+   - No scroll blocking: root is pointer-events:none, only visible children auto
+   ========================================================================== */
+
+/* Root container — DOES NOT block scrolling. pointer-events:none so touches
+   pass through to the page. Only visible children re-enable pointer-events. */
+#faisal-assistant-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 9999;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* Only the launcher gets pointer-events back (it's always interactive).
+   The panel and its children only get pointer-events when the panel is OPEN. */
+#faisal-assistant-root .fa-launcher,
+#faisal-assistant-root .fa-launcher * {
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+
+/* When the panel is OPEN, it and all its children become interactive */
+#faisal-assistant-root .fa-panel.is-open,
+#faisal-assistant-root .fa-panel.is-open * {
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+
+/* When the panel is CLOSED, it AND all its children must have NO pointer-events
+   (this prevents the closed panel from intercepting clicks/scrolls on the page) */
+#faisal-assistant-root .fa-panel:not(.is-open),
+#faisal-assistant-root .fa-panel:not(.is-open) * {
+  pointer-events: none !important;
+}
+
+/* ---------- Gemini-style launcher (v4) ----------
+   A multi-pointed gradient spark with rotating colors and breathing glow.
+   When the panel opens, the spark morphs into an X (close icon). */
+.fa-launcher {
+  position: fixed;
+  bottom: 96px; /* clears the bottom nav on mobile */
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* On desktop, position lower-right without bottom nav clearance */
+@media (min-width: 769px) {
+  .fa-launcher {
+    bottom: 28px;
+    right: 28px;
+  }
+}
+
+.fa-launcher:hover {
+  transform: scale(1.08);
+}
+
+.fa-launcher.is-hidden {
+  opacity: 0;
+  transform: scale(0.4);
+  pointer-events: none;
+}
+
+/* The gradient spark SVG (Gemini-style 4-point star) */
+.fa-launcher .fa-spark {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.3s ease;
+}
+
+/* No background glow/aura — the icon stands on its own with just a
+   subtle drop-shadow for depth (per user request). */
+
+/* The spark icon (SVG or IMG) inside the launcher — NO glow, NO pulse, clean */
+.fa-launcher .fa-spark svg,
+.fa-launcher .fa-spark img {
+  width: 44px;
+  height: 44px;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes fa-spark-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* When panel is OPEN, the launcher morphs the spark into an X */
+.fa-launcher.is-open .fa-spark svg,
+.fa-launcher.is-open .fa-spark img {
+  transform: rotate(180deg) scale(0.7);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* The X icon (hidden by default, shown when open) */
+.fa-launcher .fa-x-icon {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+  transition: opacity 0.3s ease 0.1s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s;
+  z-index: 2;
+}
+
+.fa-launcher.is-open .fa-x-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Online status dot — NO glow (per user request: no background glowing effect) */
+.fa-launcher .fa-status-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #2ecc71;
+  border: 2.5px solid #16121c;
+  z-index: 3;
+}
+
+.fa-launcher.is-open .fa-status-dot {
+  display: none;
+}
+
+/* ---------- Chat panel (v4) ---------- */
+.fa-panel {
+  position: fixed;
+  bottom: 168px; /* clears launcher + bottom nav on mobile */
+  right: 16px;
+  width: calc(100vw - 32px);
+  max-width: 380px;
+  height: 540px;
+  max-height: calc(100vh - 220px);
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(28, 22, 36, 0.96) 0%, rgba(18, 14, 24, 0.96) 100%);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(248, 93, 128, 0.15);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.6),
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(24px) scale(0.94);
+  transform-origin: bottom right;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10001;
+}
+
+/* On desktop, standard positioning */
+@media (min-width: 769px) {
+  .fa-panel {
+    bottom: 100px;
+    right: 28px;
+    max-height: calc(100vh - 140px);
+  }
+}
+
+.fa-panel.is-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* ---------- Panel header (v4) ---------- */
+.fa-header {
+  padding: 16px 18px 14px;
+  background: linear-gradient(135deg, rgba(248, 93, 128, 0.12), rgba(69, 104, 220, 0.08));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.fa-avatar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f85d80 0%, #b06ab3 50%, #4568dc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #fff;
+  font-size: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(248, 93, 128, 0.35);
+  overflow: hidden;
+}
+
+/* The AI icon image inside the avatar */
+.fa-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.fa-avatar::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #2ecc71;
+  border: 2px solid #1a1420;
+}
+
+.fa-header-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.fa-header-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.fa-header-status {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 2px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+}
+
+.fa-header-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2ecc71;
+}
+
+/* Header controls: New Pro Tip + Clear + Close */
+.fa-header-controls {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.fa-icon-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.fa-icon-btn:hover {
+  background: rgba(248, 93, 128, 0.18);
+  color: #fff;
+  border-color: rgba(248, 93, 128, 0.35);
+}
+
+.fa-icon-btn:active {
+  transform: scale(0.92);
+}
+
+.fa-icon-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* The Close/Back button — prominent on mobile as a back-navigation button,
+   subtle on desktop. */
+.fa-close-back {
+  background: rgba(248, 93, 128, 0.12);
+  border-color: rgba(248, 93, 128, 0.25);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.fa-close-back:hover {
+  background: rgba(248, 93, 128, 0.3);
+  color: #fff;
+  border-color: rgba(248, 93, 128, 0.5);
+}
+
+.fa-close-back svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* The "New Pro Tip" button — wider, with gradient */
+.fa-protip-btn {
+  background: linear-gradient(135deg, rgba(248, 93, 128, 0.2), rgba(176, 106, 179, 0.15));
+  border: 1px solid rgba(248, 93, 128, 0.3);
+  color: #fff;
+  width: auto;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 600;
+  gap: 4px;
+  border-radius: 9px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.fa-protip-btn:hover {
+  background: linear-gradient(135deg, rgba(248, 93, 128, 0.35), rgba(176, 106, 179, 0.25));
+  border-color: rgba(248, 93, 128, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(248, 93, 128, 0.25);
+}
+
+.fa-protip-btn:active {
+  transform: scale(0.95);
+}
+
+.fa-protip-btn svg {
+  width: 12px;
+  height: 12px;
+}
+
+.fa-protip-btn.is-loading svg {
+  animation: fa-spin 0.8s linear infinite;
+}
+
+@keyframes fa-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Messages area ---------- */
+.fa-messages {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+  position: relative;
+  z-index: 1;
+}
+
+.fa-messages::-webkit-scrollbar { width: 5px; }
+.fa-messages::-webkit-scrollbar-track { background: transparent; }
+.fa-messages::-webkit-scrollbar-thumb {
+  background: rgba(248, 93, 128, 0.3);
+  border-radius: 3px;
+}
+
+.fa-msg {
+  max-width: 86%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.92);
+  word-wrap: break-word;
+  animation: fa-msg-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: pre-wrap;
+}
+
+@keyframes fa-msg-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.fa-msg.is-ai {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom-left-radius: 5px;
+}
+
+.fa-msg.is-user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #f85d80 0%, #b06ab3 100%);
+  color: #fff;
+  border-bottom-right-radius: 5px;
+  box-shadow: 0 4px 12px rgba(248, 93, 128, 0.3);
+  font-weight: 500;
+}
+
+/* Pro Tip callout inside AI messages */
+.fa-protip {
+  display: block;
+  margin-top: 9px;
+  padding: 8px 11px;
+  background: linear-gradient(135deg, rgba(248, 93, 128, 0.12), rgba(176, 106, 179, 0.08));
+  border-left: 3px solid #f85d80;
+  border-radius: 8px;
+  font-size: 12.5px;
+  color: rgba(255, 220, 230, 0.95);
+  font-style: italic;
+  font-weight: 500;
+  white-space: normal;
+}
+
+/* Typing indicator */
+.fa-typing {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  border-bottom-left-radius: 5px;
+  padding: 12px 16px;
+  display: flex;
+  gap: 4px;
+}
+
+.fa-typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f85d80, #b06ab3);
+  animation: fa-typing-bounce 1.3s ease-in-out infinite;
+}
+
+.fa-typing span:nth-child(2) { animation-delay: 0.15s; }
+.fa-typing span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes fa-typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+/* ---------- Quick replies ---------- */
+.fa-quick-replies {
+  padding: 0 16px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.fa-quick-replies button {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(248, 93, 128, 0.25);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 11px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.fa-quick-replies button:hover {
+  background: linear-gradient(135deg, rgba(248, 93, 128, 0.2), rgba(176, 106, 179, 0.15));
+  border-color: #f85d80;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ---------- Input area ---------- */
+.fa-input-area {
+  padding: 10px 12px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  position: relative;
+  z-index: 1;
+}
+
+.fa-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 10px 14px;
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  resize: none;
+  max-height: 90px;
+  min-height: 40px;
+  line-height: 1.5;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.fa-input::placeholder { color: rgba(255, 255, 255, 0.35); }
+
+.fa-input:focus {
+  border-color: rgba(248, 93, 128, 0.5);
+  box-shadow: 0 0 0 3px rgba(248, 93, 128, 0.12);
+}
+
+.fa-send-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  border: none;
+  background: linear-gradient(135deg, #f85d80 0%, #b06ab3 100%);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(248, 93, 128, 0.35);
+}
+
+.fa-send-btn:hover:not(:disabled) {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(248, 93, 128, 0.5);
+}
+
+.fa-send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.fa-send-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+/* ---------- Footer ---------- */
+.fa-footer {
+  padding: 6px 16px 10px;
+  text-align: center;
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.32);
+  background: rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 1;
+}
+
+.fa-footer a {
+  color: rgba(248, 93, 128, 0.85);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.fa-footer a:hover { color: #f85d80; }
+
+/* ---------- Mobile responsive ---------- */
+@media (max-width: 480px) {
+  .fa-launcher {
+    bottom: 92px;
+    right: 16px;
+    width: 54px;
+    height: 54px;
+  }
+
+  .fa-launcher .fa-spark svg,
+  .fa-launcher .fa-spark img {
+    width: 38px;
+    height: 38px;
+  }
+
+  /* Mobile: panel is full-screen to avoid scroll issues */
+  .fa-panel {
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .fa-panel.is-open {
+    transform: translateY(0) scale(1);
+  }
+
+  /* Mobile: make the close/back button bigger and more prominent
+     (acts as a back-navigation button to exit the full-screen panel) */
+  .fa-close-back {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: rgba(248, 93, 128, 0.22);
+    border-color: rgba(248, 93, 128, 0.4);
+    color: #fff;
+  }
+
+  .fa-close-back svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .fa-messages { padding: 14px; }
+  .fa-input-area { padding: 10px 14px 14px; padding-bottom: calc(14px + env(safe-area-inset-bottom, 0)); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .fa-launcher .fa-spark svg,
+  .fa-launcher .fa-spark img,
+  .fa-typing span,
+  .fa-msg {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}

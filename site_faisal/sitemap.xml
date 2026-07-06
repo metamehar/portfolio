@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://metamehar.github.io/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://metamehar.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://metamehar.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="ur" href="https://metamehar.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://metamehar.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://metamehar.github.io/"/>
+    <image:image>
+      <image:loc>https://metamehar.github.io/images/faisal-seo-dashboard-analytics.jpg</image:loc>
+      <image:caption>FAISAL SEO expert analyzing Google ranking dashboard and keyword analytics</image:caption>
+      <image:title>FAISAL SEO Dashboard Analytics</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://metamehar.github.io/images/faisal-canva-design-workspace.jpg</image:loc>
+      <image:caption>FAISAL creating Canva graphic designs and brand identity visuals</image:caption>
+      <image:title>FAISAL Canva Design Workspace</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://metamehar.github.io/images/faisal-global-multilingual-team.jpg</image:loc>
+      <image:caption>FAISAL serving global clients across continents with multilingual SEO and WordPress services</image:caption>
+      <image:title>FAISAL Global Multilingual Service</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://metamehar.github.io/images/faisal-brand-growth-analytics.jpg</image:loc>
+      <image:caption>Launch your brand with FAISAL digital growth and SEO services</image:caption>
+      <image:title>FAISAL Brand Growth Analytics</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://metamehar.github.io/about.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://metamehar.github.io/about.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://metamehar.github.io/about.html"/>
+    <xhtml:link rel="alternate" hreflang="ur" href="https://metamehar.github.io/about.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://metamehar.github.io/about.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://metamehar.github.io/about.html"/>
+    <image:image>
+      <image:loc>https://metamehar.github.io/images/faisal-digital-growth-architect-portrait.jpg</image:loc>
+      <image:caption>FAISAL Digital Growth Architect working on SEO and WordPress projects</image:caption>
+      <image:title>FAISAL Digital Growth Architect</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://metamehar.github.io/portfolio.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://metamehar.github.io/portfolio.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://metamehar.github.io/portfolio.html"/>
+    <xhtml:link rel="alternate" hreflang="ur" href="https://metamehar.github.io/portfolio.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://metamehar.github.io/portfolio.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://metamehar.github.io/portfolio.html"/>
+  </url>
+  <url>
+    <loc>https://metamehar.github.io/blog.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://metamehar.github.io/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://metamehar.github.io/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="ur" href="https://metamehar.github.io/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://metamehar.github.io/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://metamehar.github.io/blog.html"/>
+  </url>
+  <url>
+    <loc>https://metamehar.github.io/contact.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://metamehar.github.io/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://metamehar.github.io/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="ur" href="https://metamehar.github.io/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://metamehar.github.io/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://metamehar.github.io/contact.html"/>
+  </url>
+</urlset>

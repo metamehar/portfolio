@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Explorer | FAISAL — AI-Powered Service Guide</title>
+  <meta name="description" content="Explore FAISAL's services in depth with Mehar, the AI Brand Concierge. Get a full breakdown of SEO, WordPress, Brand Identity, or Canva Design — ask questions and learn everything interactively.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://metamehar.github.io/service.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Service Explorer | FAISAL — AI-Powered Service Guide">
+  <meta property="og:description" content="Explore FAISAL's services in depth with Mehar, the AI Brand Concierge. Get a full breakdown of SEO, WordPress, Brand Identity, or Canva Design.">
+  <meta property="og:url" content="https://metamehar.github.io/service.html">
+  <meta property="og:image" content="https://metamehar.github.io/images/faisal-seo-dashboard-analytics.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Service Explorer | FAISAL — AI-Powered Service Guide">
+  <meta name="twitter:description" content="Explore FAISAL's services in depth with Mehar, the AI Brand Concierge.">
+  <meta name="twitter:image" content="https://metamehar.github.io/images/faisal-seo-dashboard-analytics.jpg">
+  <meta name="keywords" content="FAISAL, SEO services, WordPress web design, brand identity, Canva design, hire SEO expert, Pakistan freelancer, Digital Growth Architect">
+  <meta name="author" content="FAISAL (@metamehar)">
+    <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0b0c10">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="FAISAL">
+  <link rel="apple-touch-icon" href="/images/faisal-ai-icon.png">
+  <link rel="icon" type="image/png" href="/images/faisal-ai-icon.png">
+  <link rel="shortcut icon" href="/images/faisal-ai-icon.png">
+  <link rel="alternate" hreflang="en" href="https://metamehar.github.io/">
+  <link rel="alternate" hreflang="de" href="https://metamehar.github.io/">
+  <link rel="alternate" hreflang="ur" href="https://metamehar.github.io/">
+  <link rel="alternate" hreflang="es" href="https://metamehar.github.io/">
+  <link rel="alternate" hreflang="fr" href="https://metamehar.github.io/">
+  <link rel="alternate" hreflang="x-default" href="https://metamehar.github.io/">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="assistant.css">
+  <link rel="stylesheet" href="choice-modal.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script>
+    (function(){try{var t=localStorage.getItem("faisal_theme")||"dark";if(t==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();
+  </script>
+  <style>
+    /* ===== Service Page — Premium Redesign ===== */
+    body {
+      background: var(--bg-primary);
+      min-height: 100vh;
+      overflow-x: clip;
+    }
+
+    .service-page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px 120px;
+    }
+
+    /* --- Back button --- */
+    .service-page-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--color-gray-300);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      margin-bottom: 32px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    [data-theme="light"] .service-page-back {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.08);
+      color: var(--color-gray-400);
+    }
+
+    .service-page-back:hover {
+      background: rgba(248, 93, 128, 0.18);
+      color: #fff;
+      border-color: rgba(248, 93, 128, 0.35);
+      transform: translateX(-3px);
+    }
+
+    [data-theme="light"] .service-page-back:hover {
+      background: rgba(224, 69, 106, 0.12);
+      color: var(--accent-pink);
+    }
+
+    .service-page-back svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* --- Hero header (premium) --- */
+    .service-hero {
+      position: relative;
+      text-align: center;
+      padding: 48px 40px 56px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(248, 93, 128, 0.08) 0%, rgba(176, 106, 179, 0.06) 50%, rgba(69, 104, 220, 0.06) 100%);
+      border: 1px solid rgba(248, 93, 128, 0.15);
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+
+    [data-theme="light"] .service-hero {
+      background: linear-gradient(135deg, rgba(224, 69, 106, 0.04) 0%, rgba(124, 30, 209, 0.03) 50%, rgba(69, 104, 220, 0.03) 100%);
+      border: 1px solid rgba(224, 69, 106, 0.12);
+    }
+
+    /* Animated gradient halo behind the icon */
+    .service-hero::before {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      background: conic-gradient(from 0deg, rgba(248, 93, 128, 0.1), rgba(176, 106, 179, 0.08), rgba(69, 104, 220, 0.1), rgba(248, 93, 128, 0.1));
+      filter: blur(60px);
+      animation: svc-halo-rotate 12s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes svc-halo-rotate {
+      to { transform: rotate(360deg); }
+    }
+
+    .service-page-icon {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, #f85d80 0%, #b06ab3 50%, #4568dc 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      box-shadow: 0 16px 40px rgba(248, 93, 128, 0.35);
+      z-index: 1;
+    }
+
+    .service-page-icon svg {
+      width: 48px;
+      height: 48px;
+      fill: #fff;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+    }
+
+    .service-page-title {
+      position: relative;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      color: var(--color-white);
+      margin: 0 0 14px;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      z-index: 1;
+    }
+
+    .service-page-subtitle {
+      position: relative;
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--color-gray-400);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.6;
+      z-index: 1;
+    }
+
+    /* --- Premium badge row --- */
+    .service-badges {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+      z-index: 1;
+    }
+
+    .service-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--color-gray-300);
+    }
+
+    [data-theme="light"] .service-badge {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      color: var(--color-gray-400);
+    }
+
+    .service-badge svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--accent-pink);
+    }
+
+    /* --- Main layout: sidebar + chat --- */
+    .service-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* --- Sidebar (service details) --- */
+    .service-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: sticky;
+      top: 24px;
+    }
+
+    .sidebar-card {
+      background: linear-gradient(180deg, rgba(28, 22, 36, 0.96) 0%, rgba(18, 14, 24, 0.96) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    [data-theme="light"] .sidebar-card {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .sidebar-card h3 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-pink);
+      margin: 0 0 16px;
+    }
+
+    .sidebar-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 14px;
+    }
+
+    [data-theme="light"] .sidebar-stat {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .sidebar-stat:last-child { border-bottom: none; }
+
+    .sidebar-stat-label {
+      color: var(--color-gray-400);
+      font-weight: 500;
+    }
+
+    .sidebar-stat-value {
+      color: var(--color-white);
+      font-weight: 700;
+    }
+
+    .sidebar-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--color-gray-300);
+      line-height: 1.5;
+    }
+
+    .sidebar-features li svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      fill: #2ecc71;
+      margin-top: 1px;
+    }
+
+    .sidebar-cta {
+      display: block;
+      text-align: center;
+      padding: 14px 20px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #f85d80 0%, #b06ab3 100%);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 18px rgba(248, 93, 128, 0.3);
+    }
+
+    .sidebar-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(248, 93, 128, 0.45);
+    }
+
+    /* --- Chat panel (premium) --- */
+    .service-page-chat {
+      background: linear-gradient(180deg, rgba(28, 22, 36, 0.96) 0%, rgba(18, 14, 24, 0.96) 100%);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(248, 93, 128, 0.15);
+      border-radius: 24px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(248, 93, 128, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 640px;
+      max-height: 75vh;
+      position: relative;
+    }
+
+    [data-theme="light"] .service-page-chat {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Gradient top border accent */
+    .service-page-chat::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #f85d80 0%, #b06ab3 50%, #4568dc 100%);
+      z-index: 2;
+    }
+
+    .service-page-chat .fa-header {
+      padding: 18px 22px;
+      background: linear-gradient(135deg, rgba(248, 93, 128, 0.12), rgba(69, 104, 220, 0.08));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    [data-theme="light"] .service-page-chat .fa-header {
+      background: linear-gradient(135deg, rgba(224, 69, 106, 0.06), rgba(124, 30, 209, 0.04));
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .service-page-chat .fa-avatar {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #f85d80 0%, #b06ab3 50%, #4568dc 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(248, 93, 128, 0.3);
+    }
+
+    .service-page-chat .fa-avatar::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      right: -1px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #2ecc71;
+      border: 2.5px solid #1a1420;
+    }
+
+    .service-page-chat .fa-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .service-page-chat .fa-header-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0;
+    }
+
+    [data-theme="light"] .service-page-chat .fa-header-name { color: #1a1d29; }
+
+    .service-page-chat .fa-header-status {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.55);
+      margin: 3px 0 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    [data-theme="light"] .service-page-chat .fa-header-status { color: #6b7280; }
+
+    .service-page-chat .fa-header-status::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #2ecc71;
+    }
+
+    .service-page-chat .fa-messages {
+      flex: 1;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scroll-behavior: smooth;
+    }
+
+    [data-theme="light"] .service-page-chat .fa-messages {
+      background: #f7f8fb;
+    }
+
+    .service-page-chat .fa-messages::-webkit-scrollbar { width: 6px; }
+    .service-page-chat .fa-messages::-webkit-scrollbar-track { background: transparent; }
+    .service-page-chat .fa-messages::-webkit-scrollbar-thumb {
+      background: rgba(248, 93, 128, 0.3);
+      border-radius: 3px;
+    }
+
+    .service-page-chat .fa-msg {
+      max-width: 85%;
+      padding: 13px 17px;
+      border-radius: 18px;
+      font-size: 14.5px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      animation: svc-msg-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes svc-msg-in {
+      from { opacity: 0; transform: translateY(8px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .service-page-chat .fa-msg.is-ai {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-bottom-left-radius: 6px;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    [data-theme="light"] .service-page-chat .fa-msg.is-ai {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      color: #1a1d29;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .service-page-chat .fa-msg.is-user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #f85d80 0%, #b06ab3 100%);
+      color: #fff;
+      border-bottom-right-radius: 6px;
+      box-shadow: 0 4px 14px rgba(248, 93, 128, 0.3);
+      font-weight: 500;
+    }
+
+    .service-page-chat .fa-protip {
+      display: block;
+      margin-top: 11px;
+      padding: 10px 13px;
+      background: linear-gradient(135deg, rgba(248, 93, 128, 0.12), rgba(176, 106, 179, 0.08));
+      border-left: 3px solid #f85d80;
+      border-radius: 8px;
+      font-size: 13px;
+      color: rgba(255, 220, 230, 0.95);
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    [data-theme="light"] .service-page-chat .fa-protip {
+      background: linear-gradient(135deg, rgba(224, 69, 106, 0.08), rgba(124, 30, 209, 0.05));
+      color: #4a5060;
+    }
+
+    .service-page-chat .fa-typing {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 18px;
+      padding: 15px 20px;
+      display: flex;
+      gap: 5px;
+    }
+
+    [data-theme="light"] .service-page-chat .fa-typing {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .service-page-chat .fa-typing span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f85d80, #b06ab3);
+      animation: fa-typing-bounce 1.3s ease-in-out infinite;
+    }
+
+    .service-page-chat .fa-typing span:nth-child(2) { animation-delay: 0.15s; }
+    .service-page-chat .fa-typing span:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes fa-typing-bounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-6px); opacity: 1; }
+    }
+
+    /* Quick replies */
+    .service-page-chat .fa-quick-replies {
+      padding: 0 22px 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .service-page-chat .fa-quick-replies button {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(248, 93, 128, 0.25);
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 13px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+
+    [data-theme="light"] .service-page-chat .fa-quick-replies button {
+      background: #ffffff;
+      border-color: rgba(224, 69, 106, 0.2);
+      color: #4a5060;
+    }
+
+    .service-page-chat .fa-quick-replies button:hover {
+      background: linear-gradient(135deg, rgba(248, 93, 128, 0.2), rgba(176, 106, 179, 0.15));
+      border-color: #f85d80;
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    [data-theme="light"] .service-page-chat .fa-quick-replies button:hover {
+      background: linear-gradient(135deg, rgba(224, 69, 106, 0.1), rgba(124, 30, 209, 0.08));
+      color: var(--accent-pink);
+    }
+
+    /* Input area */
+    .service-page-chat .fa-input-area {
+      padding: 14px 18px 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(0, 0, 0, 0.2);
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+    }
+
+    [data-theme="light"] .service-page-chat .fa-input-area {
+      background: #ffffff;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .service-page-chat .fa-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 13px 17px;
+      color: #fff;
+      font-size: 14.5px;
+      font-family: inherit;
+      resize: none;
+      max-height: 100px;
+      min-height: 46px;
+      line-height: 1.5;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    [data-theme="light"] .service-page-chat .fa-input {
+      background: #f7f8fb;
+      border-color: rgba(0, 0, 0, 0.08);
+      color: #1a1d29;
+    }
+
+    .service-page-chat .fa-input::placeholder { color: rgba(255, 255, 255, 0.35); }
+    [data-theme="light"] .service-page-chat .fa-input::placeholder { color: #9ca3af; }
+
+    .service-page-chat .fa-input:focus {
+      border-color: rgba(248, 93, 128, 0.5);
+      box-shadow: 0 0 0 3px rgba(248, 93, 128, 0.12);
+    }
+
+    .service-page-chat .fa-send-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, #f85d80 0%, #b06ab3 100%);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(248, 93, 128, 0.35);
+    }
+
+    .service-page-chat .fa-send-btn:hover:not(:disabled) {
+      transform: translateY(-1px) scale(1.05);
+      box-shadow: 0 8px 22px rgba(248, 93, 128, 0.5);
+    }
+
+    .service-page-chat .fa-send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .service-page-chat .fa-send-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* Footer */
+    .service-page-chat .fa-footer {
+      padding: 10px 22px 14px;
+      text-align: center;
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    [data-theme="light"] .service-page-chat .fa-footer {
+      color: #9ca3af;
+      background: #f7f8fb;
+    }
+
+    .service-page-chat .fa-footer a {
+      color: rgba(248, 93, 128, 0.85);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 900px) {
+      .service-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .service-sidebar {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .sidebar-card {
+        flex: 1;
+        min-width: 250px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .service-page { padding: 20px 16px 100px; }
+      .service-hero { padding: 32px 24px 36px; border-radius: 22px; }
+      .service-page-icon { width: 72px; height: 72px; border-radius: 20px; }
+      .service-page-icon svg { width: 36px; height: 36px; }
+      .service-page-chat { height: 70vh; border-radius: 20px; }
+      .service-page-chat .fa-messages { padding: 16px; }
+      .service-badges { gap: 8px; }
+      .service-badge { font-size: 11.5px; padding: 6px 12px; }
+    }
+
+    @media (max-width: 480px) {
+      .service-sidebar {
+        flex-direction: column;
+      }
+
+      .service-page-chat {
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+      }
+    }
+  </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "FAISAL Service Explorer",
+  "description": "AI-powered service guide that helps visitors explore FAISAL's SEO, WordPress, branding, and Canva design services interactively.",
+  "url": "https://metamehar.github.io/service.html",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Person",
+    "name": "FAISAL",
+    "url": "https://metamehar.github.io/"
+  }
+}
+</script>
+</head>
+<body>
+
+  <main class="service-page">
+    <button class="service-page-back" onclick="if(history.length>1){history.back()}else{window.location.href='/index.html'}">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z"/></svg>
+      Back to Site
+    </button>
+
+    <!-- Premium hero header -->
+    <div class="service-hero">
+      <div class="service-page-icon" id="svc-icon"></div>
+      <h1 class="service-page-title" id="svc-title">Service Explorer</h1>
+      <p class="service-page-subtitle" id="svc-subtitle">Chat with Mehar, FAISAL's AI Concierge, to learn everything about this service.</p>
+      <div class="service-badges" id="svc-badges"></div>
+    </div>
+
+    <!-- Main layout: sidebar + chat -->
+    <div class="service-layout">
+      <!-- Sidebar with service details -->
+      <aside class="service-sidebar">
+        <div class="sidebar-card">
+          <h3>Service Details</h3>
+          <div id="svc-details"></div>
+        </div>
+        <div class="sidebar-card">
+          <h3>What's Included</h3>
+          <ul class="sidebar-features" id="svc-features"></ul>
+        </div>
+        <a class="sidebar-cta" id="svc-cta" href="/contact.html">Get a Custom Quote →</a>
+      </aside>
+
+      <!-- Premium AI chat panel -->
+      <div class="service-page-chat">
+        <div class="fa-header">
+          <div class="fa-avatar">
+            <img src="/images/faisal-ai-icon.png" alt="FAISAL AI">
+          </div>
+          <div>
+            <p class="fa-header-name">Mehar · AI Concierge</p>
+            <p class="fa-header-status">Online · exploring this service with you</p>
+          </div>
+        </div>
+        <div class="fa-messages" id="svc-messages"></div>
+        <div class="fa-quick-replies" id="svc-quick-replies"></div>
+        <div class="fa-input-area">
+          <textarea class="fa-input" id="svc-input" rows="1" placeholder="Ask me anything about this service..." aria-label="Type your message"></textarea>
+          <button class="fa-send-btn" id="svc-send" aria-label="Send message">
+            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
+        </div>
+        <div class="fa-footer">
+          Powered by <a href="/contact.html">FAISAL · Digital Growth Architect</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Service page logic — reads the ?s= query param, populates the page,
+    // and starts an AI conversation about that specific service.
+    (function() {
+      'use strict'
+
+      const SERVICES = {
+        'seo': {
+          name: 'SEO & Digital Marketing',
+          desc: 'Technical SEO, keyword strategy — rank higher on Google and drive sustainable organic traffic',
+          icon: '<svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9s2.01-5 4.5-5 4.5 2.01 4.5 5-2.01 5-4.5 5z"/></svg>',
+          badges: ['Technical SEO', 'On-Page', 'Link Building', 'Local SEO', 'Core Web Vitals'],
+          details: [
+            { label: 'Starting from', value: '$150/mo' },
+            { label: 'Timeline', value: '3-6 months' },
+            { label: 'Experience', value: '5+ years' },
+            { label: 'Projects delivered', value: '240+' },
+          ],
+          features: [
+            'Comprehensive SEO audit with actionable recommendations',
+            'Keyword research and competitor analysis',
+            'On-page optimization (titles, meta, headings, content)',
+            'Technical SEO (speed, schema, Core Web Vitals)',
+            'Monthly  from authoritative sources',
+            'Google Search Console & Analytics setup',
+            'Local SEO with Google Business Profile optimization',
+            'Monthly ranking and traffic reports',
+          ],
+          greeting: "Hi, I'm Mehar — let's explore FAISAL's SEO & Digital Marketing services. FAISAL offers technical SEO audits, on-page optimization, keyword strategy that push your website to the top of Google. What would you like to dive into first?",
+          quickReplies: [
+            'What\'s included in an SEO audit?',
+            'How long until I see ranking results?',
+            'What does SEO cost per month?',
+            'Do you do local SEO for small businesses?',
+          ],
+        },
+        'wordpress': {
+          name: 'WordPress Web Design',
+          desc: 'Fast, secure, conversion-focused WordPress sites built with clean, lightweight code that loads in under 2 seconds',
+          icon: '<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>',
+          badges: ['Custom Build', 'WooCommerce', 'Core Web Vitals', 'Responsive', 'Speed Optimized'],
+          details: [
+            { label: 'Starting from', value: '$400' },
+            { label: 'Timeline', value: '7-21 days' },
+            { label: 'Sites delivered', value: '320+' },
+            { label: 'Load time', value: '< 2 seconds' },
+          ],
+          features: [
+            'Custom WordPress design tailored to your brand',
+            'Mobile-responsive across all devices',
+            'Core Web Vitals optimization (90+ scores)',
+            'WooCommerce e-commerce setup',
+            'Multi-language support (WPML/Polylang)',
+            'Schema markup for rich snippets',
+            'Security hardening and SSL setup',
+            'CMS training and documentation',
+          ],
+          greeting: "Hi, I'm Mehar — let's explore FAISAL's WordPress Web Design services. FAISAL builds fast, secure, conversion-focused WordPress sites that load in under 2 seconds and pass Core Web Vitals. What would you like to know?",
+          quickReplies: [
+            'How long does a WordPress site take?',
+            'Do you build e-commerce stores?',
+            'What about ongoing maintenance?',
+            'Can you speed up my existing site?',
+          ],
+        },
+        'canva': {
+          name: 'Canva Graphic Design',
+          desc: 'Scroll-stopping social media posts, ad creatives, presentations, and marketing collateral designed in Canva Pro',
+          icon: '<svg viewBox="0 0 24 24"><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/></svg>',
+          badges: ['Social Media', 'Ad Creatives', 'Presentations', 'Brand Kits', 'Canva Pro'],
+          details: [
+            { label: 'Starting from', value: '$80' },
+            { label: 'Turnaround', value: '24-48 hours' },
+            { label: 'Designs delivered', value: '1,200+' },
+            { label: 'Revisions', value: 'Unlimited' },
+          ],
+          features: [
+            'Social media post designs (Instagram, Facebook, LinkedIn)',
+            'Ad creatives for Facebook, Google, and TikTok ads',
+            'Professional presentation decks',
+            'Marketing collateral (flyers, brochures, business cards)',
+            'Brand kit setup (colors, fonts, logos in Canva)',
+            'Editable Canva templates you own forever',
+            'Story and reel covers',
+            'Email header and newsletter designs',
+          ],
+          greeting: "Hi, I'm Mehar — let's explore FAISAL's Canva Graphic Design services. FAISAL creates scroll-stopping social media posts, ad creatives, presentations, and marketing collateral in Canva Pro. What would you like to learn?",
+          quickReplies: [
+            'What types of designs do you create?',
+            'Do you offer monthly design packs?',
+            'Can you match my brand colors?',
+            'What\'s the turnaround time?',
+          ],
+        },
+        'brand': {
+          name: 'Brand Identity Systems',
+          desc: 'Logos, color palettes, typography, and complete visual guidelines that turn businesses into memorable brands',
+          icon: '<svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5 9.5 9.75 12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z"/></svg>',
+          badges: ['Logo Design', 'Color Palette', 'Typography', 'Brand Guide', 'Visual System'],
+          details: [
+            { label: 'Starting from', value: '$250' },
+            { label: 'Timeline', value: '5-10 days' },
+            { label: 'Brands created', value: '180+' },
+            { label: 'Logo concepts', value: '3 options' },
+          ],
+          features: [
+            '3 unique logo concepts to choose from',
+            'Primary logo, secondary logo, and icon variants',
+            'Color palette with hex, RGB, and CMYK values',
+            'Typography system (heading + body fonts)',
+            'Complete brand guidelines PDF (20+ pages)',
+            'Social media profile and cover templates',
+            'Business card and letterhead design',
+            'Brand usage do\'s and don\'s',
+          ],
+          greeting: "Hi, I'm Mehar — let's explore FAISAL's Brand Identity services. FAISAL designs logos, color palettes, typography systems, and complete visual guidelines that turn businesses into memorable brands. What interests you most?",
+          quickReplies: [
+            'What\'s included in a brand package?',
+            'How many logo concepts do I get?',
+            'Do you create brand guidelines?',
+            'Can you refresh my existing brand?',
+          ],
+        },
+      }
+
+      // Read the ?s= query param
+      const params = new URLSearchParams(window.location.search)
+      const serviceKey = params.get('s') || 'seo'
+      const svc = SERVICES[serviceKey] || SERVICES['seo']
+
+      // Populate the page header
+      document.getElementById('svc-icon').innerHTML = svc.icon
+      document.getElementById('svc-title').textContent = svc.name
+      document.getElementById('svc-subtitle').textContent = svc.desc
+      document.title = svc.name + ' | FAISAL — AI Service Guide'
+
+      // Populate badges
+      const badgesEl = document.getElementById('svc-badges')
+      const checkSvg = '<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>'
+      svc.badges.forEach(function(b) {
+        const span = document.createElement('span')
+        span.className = 'service-badge'
+        span.innerHTML = checkSvg + b
+        badgesEl.appendChild(span)
+      })
+
+      // Populate sidebar details
+      const detailsEl = document.getElementById('svc-details')
+      svc.details.forEach(function(d) {
+        const row = document.createElement('div')
+        row.className = 'sidebar-stat'
+        row.innerHTML = '<span class="sidebar-stat-label">' + d.label + '</span><span class="sidebar-stat-value">' + d.value + '</span>'
+        detailsEl.appendChild(row)
+      })
+
+      // Populate sidebar features
+      const featuresEl = document.getElementById('svc-features')
+      const featureSvg = '<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>'
+      svc.features.forEach(function(f) {
+        const li = document.createElement('li')
+        li.innerHTML = featureSvg + '<span>' + f + '</span>'
+        featuresEl.appendChild(li)
+      })
+
+      // Update the CTA link with the service pre-filled
+      document.getElementById('svc-cta').href = '/contact.html?service=' + encodeURIComponent(svc.name)
+
+      // Chat state
+      let conversation = []
+      let isTyping = false
+
+      const messagesEl = document.getElementById('svc-messages')
+      const inputEl = document.getElementById('svc-input')
+      const sendBtn = document.getElementById('svc-send')
+      const quickEl = document.getElementById('svc-quick-replies')
+
+      function appendMessage(role, content) {
+        const div = document.createElement('div')
+        div.className = 'fa-msg ' + (role === 'user' ? 'is-user' : 'is-ai')
+
+        if (role === 'assistant') {
+          const protipMatch = content.match(/^(.*?)(\n*\s*[💡✨\*]?\s*[Pp]ro\s*[Tt]ip:.*?)$/s)
+          if (protipMatch && protipMatch[2]) {
+            const mainText = protipMatch[1].replace(/\s+$/, '')
+            const tipText = protipMatch[2].replace(/^\s+/, '')
+            if (mainText) div.appendChild(document.createTextNode(mainText))
+            const tip = document.createElement('span')
+            tip.className = 'fa-protip'
+            tip.textContent = tipText
+            div.appendChild(tip)
+          } else {
+            div.textContent = content
+          }
+        } else {
+          div.textContent = content
+        }
+
+        messagesEl.appendChild(div)
+        messagesEl.scrollTop = messagesEl.scrollHeight
+      }
+
+      function renderQuickReplies(show) {
+        quickEl.innerHTML = ''
+        if (!show || !svc.quickReplies) return
+        svc.quickReplies.forEach(function(text) {
+          const b = document.createElement('button')
+          b.textContent = text
+          b.addEventListener('click', function() {
+            inputEl.value = text
+            handleSend()
+          })
+          quickEl.appendChild(b)
+        })
+      }
+
+      function showTyping() {
+        if (document.getElementById('svc-typing')) return
+        const div = document.createElement('div')
+        div.className = 'fa-typing'
+        div.id = 'svc-typing'
+        div.innerHTML = '<span></span><span></span><span></span>'
+        messagesEl.appendChild(div)
+        messagesEl.scrollTop = messagesEl.scrollHeight
+      }
+
+      function hideTyping() {
+        const t = document.getElementById('svc-typing')
+        if (t) t.remove()
+      }
+
+      async function handleSend() {
+        const text = inputEl.value.trim()
+        if (!text || isTyping) return
+
+        conversation.push({ role: 'user', content: text })
+        appendMessage('user', text)
+        inputEl.value = ''
+        inputEl.style.height = 'auto'
+        renderQuickReplies(false)
+
+        isTyping = true
+        sendBtn.disabled = true
+        showTyping()
+
+        try {
+          const res = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ history: conversation }),
+          })
+          const data = await res.json()
+          hideTyping()
+          if (data && data.success && data.reply) {
+            conversation.push({ role: 'assistant', content: data.reply })
+            appendMessage('assistant', data.reply)
+          } else {
+            appendMessage('assistant', "I'm sorry — I couldn't generate a response just now. Please try again.")
+          }
+        } catch (err) {
+          hideTyping()
+          appendMessage('assistant', "I'm having trouble connecting. Please try again, or email hello@metamehar.com directly.")
+        } finally {
+          isTyping = false
+          sendBtn.disabled = false
+        }
+      }
+
+      sendBtn.addEventListener('click', handleSend)
+      inputEl.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault()
+          handleSend()
+        }
+      })
+      inputEl.addEventListener('input', function() {
+        inputEl.style.height = 'auto'
+        inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px'
+      })
+
+      // Start with the greeting + quick replies
+      conversation.push({ role: 'assistant', content: svc.greeting })
+      appendMessage('assistant', svc.greeting)
+      renderQuickReplies(true)
+    })()
+  </script>
+</body>
+</html>

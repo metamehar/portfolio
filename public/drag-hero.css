@@ -1,0 +1,511 @@
+/* ==========================================================================
+   FAISAL — Premium Draggable Hero Slider
+   A fullscreen horizontal slider with mouse/touch drag, inertia, spring snap,
+   parallax images, and a custom "DRAG" cursor. Inspired by award-winning
+   creative agency portfolios.
+   ========================================================================== */
+
+/* --- Reset old hero styles for the new structure --- */
+.hero-section.draggable-hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 640px;
+  overflow: hidden;
+  background: var(--bg-primary);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  touch-action: pan-y;
+}
+
+.hero-section.draggable-hero.is-dragging {
+  cursor: grabbing;
+}
+
+/* Prevent text/image selection during drag */
+.hero-section.draggable-hero * {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.hero-section.draggable-hero img {
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+/* --- The track that holds all slides --- */
+.hero-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+/* --- Each slide (100vw × 100vh) --- */
+.hero-slide {
+  position: relative;
+  flex: 0 0 100vw;
+  width: 100vw;
+  height: 100vh;
+  min-height: 640px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Slide background image (full-bleed, with parallax) */
+.hero-slide-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-slide-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* Dark gradient overlay for text readability */
+.hero-slide-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(11, 12, 16, 0.85) 0%, rgba(11, 12, 16, 0.6) 50%, rgba(11, 12, 16, 0.8) 100%);
+  z-index: 1;
+}
+
+[data-theme="light"] .hero-slide-bg::after {
+  background: linear-gradient(135deg, rgba(247, 248, 251, 0.85) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(247, 248, 251, 0.8) 100%);
+}
+
+/* --- Slide content (text + CTA) --- */
+.hero-slide-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 80px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+  will-change: transform, opacity;
+}
+
+/* Text side */
+.hero-slide-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-slide-subtitle {
+  font-family: var(--font-secondary);
+  font-size: clamp(13px, 1.5vw, 16px);
+  font-weight: 500;
+  color: var(--accent-pink);
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hero-slide-heading {
+  font-size: clamp(36px, 6vw, 80px);
+  line-height: 1.05;
+  margin-bottom: 24px;
+  font-weight: 800;
+  color: var(--color-white);
+  letter-spacing: -1px;
+}
+
+.hero-slide-heading span {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+
+.hero-slide-desc {
+  font-size: clamp(14px, 1.5vw, 17px);
+  color: var(--color-gray-300);
+  margin-bottom: 36px;
+  max-width: 520px;
+  line-height: 1.65;
+}
+
+.hero-slide-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  border-radius: var(--border-radius-full);
+  background: linear-gradient(135deg, #f85d80 0%, #b06ab3 100%);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease;
+  box-shadow: 0 8px 24px rgba(248, 93, 128, 0.35);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-slide-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(248, 93, 128, 0.5);
+}
+
+.hero-slide-cta::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.7s ease;
+}
+
+.hero-slide-cta:hover::after {
+  left: 100%;
+}
+
+/* Image side */
+.hero-slide-image {
+  position: relative;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  will-change: transform;
+}
+
+.hero-slide-image img {
+  width: 100%;
+  height: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Shape background behind the image */
+.hero-slide-image::before {
+  content: '';
+  position: absolute;
+  inset: -5%;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--border-radius-lg);
+  transform: rotate(-3deg);
+  z-index: -1;
+}
+
+/* --- Slide number indicator (top-right) --- */
+.hero-slide-number {
+  position: absolute;
+  top: 50%;
+  right: 60px;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: center;
+  font-size: clamp(80px, 12vw, 160px);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.03);
+  z-index: 1;
+  pointer-events: none;
+  letter-spacing: -5px;
+  line-height: 1;
+}
+
+[data-theme="light"] .hero-slide-number {
+  color: rgba(0, 0, 0, 0.04);
+}
+
+/* --- Custom DRAG cursor indicator --- */
+.drag-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f85d80, #b06ab3);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  pointer-events: none;
+  z-index: 10010;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 24px rgba(248, 93, 128, 0.4);
+  text-transform: uppercase;
+}
+
+.drag-cursor.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.drag-cursor.is-dragging {
+  transform: translate(-50%, -50%) scale(1.15);
+  background: linear-gradient(135deg, #b06ab3, #4568dc);
+}
+
+/* --- Pagination dots (bottom-center) --- */
+.drag-dots {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.drag-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 0;
+}
+
+.drag-dot.is-active {
+  width: 40px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #f85d80, #b06ab3);
+}
+
+.drag-dot:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* --- Slide counter (bottom-left) --- */
+.drag-counter {
+  position: absolute;
+  bottom: 40px;
+  left: 80px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  z-index: 10;
+  font-family: var(--font-secondary);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.drag-counter .current {
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.drag-counter .separator {
+  font-size: 20px;
+  opacity: 0.4;
+}
+
+/* --- Progress bar (bottom, full-width) --- */
+.drag-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f85d80, #b06ab3, #4568dc);
+  z-index: 10;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 0 3px 3px 0;
+}
+
+/* --- Social links (right side, vertical) --- */
+.hero-drag-socials {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 10;
+}
+
+.hero-drag-socials a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+}
+
+.hero-drag-socials a:hover {
+  background: var(--accent-pink);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.hero-drag-socials a svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* --- Hint badge (shows on first load, fades after a few seconds) --- */
+.drag-hint {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: drag-hint-pulse 2s ease-in-out infinite;
+  transition: opacity 0.5s ease;
+}
+
+.drag-hint.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.drag-hint svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--accent-pink);
+  animation: drag-hint-icon 2s ease-in-out infinite;
+}
+
+@keyframes drag-hint-pulse {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-4px); }
+}
+
+@keyframes drag-hint-icon {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .hero-slide-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 0 40px;
+    text-align: center;
+  }
+
+  .hero-slide-text {
+    align-items: center;
+  }
+
+  .hero-slide-image {
+    display: none;
+  }
+
+  .hero-slide-number {
+    font-size: clamp(60px, 20vw, 120px);
+    right: 20px;
+  }
+
+  .drag-counter {
+    left: 30px;
+    bottom: 30px;
+  }
+
+  .hero-drag-socials {
+    right: 15px;
+  }
+
+  .hero-drag-socials a {
+    width: 34px;
+    height: 34px;
+  }
+
+  .drag-hint {
+    bottom: 90px;
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slide-content {
+    padding: 0 24px;
+  }
+
+  .hero-slide-heading {
+    font-size: clamp(28px, 9vw, 42px);
+  }
+
+  .hero-slide-desc {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .hero-slide-cta {
+    padding: 13px 28px;
+    font-size: 14px;
+  }
+
+  .drag-counter {
+    display: none;
+  }
+
+  .hero-drag-socials {
+    display: none;
+  }
+
+  .drag-dots {
+    bottom: 30px;
+  }
+
+  .drag-hint {
+    bottom: 80px;
+  }
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-track {
+    transition: none !important;
+  }
+
+  .drag-hint,
+  .drag-hint svg {
+    animation: none !important;
+  }
+}

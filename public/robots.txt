@@ -1,0 +1,26 @@
+# FAISAL Portfolio — Robots.txt
+# Allow all crawlers full access
+User-agent: *
+Allow: /
+
+# Block API routes from being indexed (they're not content pages)
+Disallow: /api/
+
+# Allow AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended) explicitly
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Sitemap
+Sitemap: https://metamehar.github.io/sitemap.xml

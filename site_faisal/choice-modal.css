@@ -1,0 +1,273 @@
+/* ==========================================================================
+   FAISAL — Service Choice Modal
+   A premium modal that appears when a user clicks a footer service link
+   on desktop. Asks: "Explore with AI Agent" or "Go to Contact Page".
+   On mobile, the choice is skipped (goes directly to contact).
+   ========================================================================== */
+
+.fa-choice-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 6, 12, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 10004;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.fa-choice-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.fa-choice-modal {
+  width: 100%;
+  max-width: 520px;
+  background: linear-gradient(180deg, rgba(28, 22, 36, 0.98) 0%, rgba(18, 14, 24, 0.98) 100%);
+  border: 1px solid rgba(248, 93, 128, 0.18);
+  border-radius: 24px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.6),
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+  color: #fff;
+}
+
+[data-theme="light"] .fa-choice-modal {
+  background: linear-gradient(180deg, #ffffff 0%, #f7f8fb 100%);
+  border: 1px solid rgba(224, 69, 106, 0.15);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.15), 0 8px 24px rgba(0, 0, 0, 0.08);
+  color: #1a1d29;
+}
+
+.fa-choice-overlay.is-open .fa-choice-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* Modal header */
+.fa-choice-header {
+  padding: 28px 28px 20px;
+  background: linear-gradient(135deg, rgba(248, 93, 128, 0.12), rgba(69, 104, 220, 0.08));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+  position: relative;
+}
+
+[data-theme="light"] .fa-choice-header {
+  background: linear-gradient(135deg, rgba(224, 69, 106, 0.06), rgba(124, 30, 209, 0.04));
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.fa-choice-service-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f85d80 0%, #b06ab3 50%, #4568dc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 8px 20px rgba(248, 93, 128, 0.3);
+}
+
+.fa-choice-service-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: #fff;
+}
+
+.fa-choice-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 6px;
+  color: #fff;
+  letter-spacing: 0.2px;
+}
+
+[data-theme="light"] .fa-choice-title { color: #1a1d29; }
+
+.fa-choice-subtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  line-height: 1.5;
+}
+
+[data-theme="light"] .fa-choice-subtitle { color: #6b7280; }
+
+.fa-choice-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  padding: 0;
+}
+
+[data-theme="light"] .fa-choice-close {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #4a5060;
+}
+
+.fa-choice-close:hover {
+  background: rgba(248, 93, 128, 0.2);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.fa-choice-close svg { width: 14px; height: 14px; fill: currentColor; }
+
+/* Modal body — the two choice cards */
+.fa-choice-body {
+  padding: 24px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fa-choice-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="light"] .fa-choice-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.fa-choice-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(248, 93, 128, 0.3);
+  box-shadow: 0 12px 28px rgba(248, 93, 128, 0.15);
+}
+
+[data-theme="light"] .fa-choice-card:hover {
+  border-color: rgba(224, 69, 106, 0.2);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.fa-choice-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #f85d80, #b06ab3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.fa-choice-card:hover::before { opacity: 1; }
+
+.fa-choice-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.fa-choice-card:hover .fa-choice-card-icon {
+  transform: scale(1.1);
+}
+
+.fa-choice-card-icon.ai {
+  background: linear-gradient(135deg, rgba(248, 93, 128, 0.2), rgba(176, 106, 179, 0.15));
+  color: #f85d80;
+}
+
+.fa-choice-card-icon.contact {
+  background: linear-gradient(135deg, rgba(69, 104, 220, 0.2), rgba(46, 204, 113, 0.15));
+  color: #4568dc;
+}
+
+.fa-choice-card-icon svg { width: 24px; height: 24px; fill: currentColor; }
+
+.fa-choice-card-text {
+  flex: 1;
+}
+
+.fa-choice-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: #fff;
+}
+
+[data-theme="light"] .fa-choice-card-title { color: #1a1d29; }
+
+.fa-choice-card-desc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+  line-height: 1.4;
+}
+
+[data-theme="light"] .fa-choice-card-desc { color: #6b7280; }
+
+.fa-choice-card-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(248, 93, 128, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.fa-choice-card:hover .fa-choice-card-arrow {
+  background: linear-gradient(135deg, #f85d80, #b06ab3);
+  transform: translateX(4px);
+}
+
+.fa-choice-card-arrow svg { width: 14px; height: 14px; fill: #fff; }
+
+/* Mobile: full screen */
+@media (max-width: 480px) {
+  .fa-choice-overlay { padding: 0; }
+  .fa-choice-modal {
+    max-width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+  .fa-choice-header { border-radius: 0; padding: 24px 20px 16px; }
+  .fa-choice-body { padding: 20px; }
+}
